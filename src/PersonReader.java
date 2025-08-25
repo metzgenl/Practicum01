@@ -41,8 +41,8 @@ public class PersonReader
                 BufferedReader reader =
                         new BufferedReader(new InputStreamReader(in));
 
-                System.out.println(String.format("%-10s %-12s %-12s %-8s %-4s", "ID#", "Firstname", "Lastname", "Title", "YOB"));
-                System.out.println("===================================================");
+                System.out.printf("%-10s %-12s %-12s %-8s %-4s%n", "ID#", "Firstname", "Lastname", "Title", "YOB");
+                System.out.println("==================================================");
                 while(reader.ready())
                 {
                     rec = reader.readLine();
@@ -55,9 +55,8 @@ public class PersonReader
                         int yob = Integer.parseInt(fields[4].trim());
 
                         // Format into columns
-                        String row = String.format("%-10s %-12s %-12s %-8s %-4d",
+                        System.out.printf("%-10s %-12s %-12s %-8s %-4d%n",
                                 id, firstName, lastName, title, yob);
-                        System.out.println(row);
                     }
                 }
                 reader.close(); // must close the file to seal it and flush buffer

@@ -16,6 +16,7 @@ public class ProductWriter {
         String id = "000000";
         String name = "";
         String description= "";
+        String fileName = "";
         double cost;
         Boolean done = false;
 
@@ -34,17 +35,18 @@ public class ProductWriter {
             done = SafeInput.getYNConfirm(in, "Are you done adding products?");
 
         }while(!done);
+        fileName = SafeInput.getNonZeroLenString(in, "Enter the filename");
         //Save information (from Lab13 of Computer Programming I)
-        saveFile(myArrList);
+        saveFile(myArrList, fileName);
 
     }
     //Save File function
-    private static void saveFile(ArrayList<String> myArrList) {
+    private static void saveFile(ArrayList<String> myArrList, String fileName) {
         Scanner scanner = new Scanner(System.in);
         //Ask user for filename if this is a new array and not an opened one
         // Write to file, code from video
         File workingDirectory = new File(System.getProperty("user.dir"));
-        Path file = Paths.get(workingDirectory.getPath(), "src", "ProductTestData.txt"); //Put in user file name here
+        Path file = Paths.get(workingDirectory.getPath(), "src", fileName); //Put in user file name here
         try {
             OutputStream out =
                     new BufferedOutputStream(Files.newOutputStream(file, CREATE));
@@ -57,7 +59,7 @@ public class ProductWriter {
             }
 
             writer.close();
-            System.out.println("Data saved successfully to PersonTestData.txt");
+            System.out.println("Data saved successfully to " + fileName);
         } catch (IOException e) {
             e.printStackTrace();
         }

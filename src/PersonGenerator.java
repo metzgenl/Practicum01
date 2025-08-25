@@ -16,7 +16,8 @@ public class PersonGenerator {
         String id = "000000";
         String firstName = "";
         String lastName = "";
-        String title= "";
+        String fileName = "";
+        String title = "";
         int yearOfBirth;
         Boolean done = false;
 
@@ -36,17 +37,18 @@ public class PersonGenerator {
             done = SafeInput.getYNConfirm(in, "Are you done adding people?");
 
         }while(!done);
+        fileName = SafeInput.getNonZeroLenString(in, "Enter the filename");
         //Save information (from Lab13 of Computer Programming I)
-        saveFile(myArrList);
+        saveFile(myArrList, fileName);
 
     }
     //Save File function
-    private static void saveFile(ArrayList<String> myArrList) {
+    private static void saveFile(ArrayList<String> myArrList, String fileName) {
         Scanner scanner = new Scanner(System.in);
         //Ask user for filename if this is a new array and not an opened one
         // Write to file, code from video
         File workingDirectory = new File(System.getProperty("user.dir"));
-        Path file = Paths.get(workingDirectory.getPath(), "src", "PersonTestData.txt"); //Put in user file name here
+        Path file = Paths.get(workingDirectory.getPath(), "src", fileName); //Put in user file name here
         try {
             OutputStream out =
                     new BufferedOutputStream(Files.newOutputStream(file, CREATE));
@@ -59,7 +61,7 @@ public class PersonGenerator {
             }
 
             writer.close();
-            System.out.println("Data saved successfully to PersonTestData.txt");
+            System.out.println("Data saved successfully to " + fileName);
         } catch (IOException e) {
             e.printStackTrace();
         }

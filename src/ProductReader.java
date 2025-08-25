@@ -41,7 +41,7 @@ public class ProductReader
                 BufferedReader reader =
                         new BufferedReader(new InputStreamReader(in));
 
-                System.out.println(String.format("%-10s %-12s %-24s %-10s", "ID#", "Name", "Description", "Cost"));
+                System.out.printf("%-10s %-12s %-24s %-10s%n", "ID#", "Name", "Description", "Cost");
                 System.out.println("========================================================");
                 while(reader.ready())
                 {
@@ -54,9 +54,8 @@ public class ProductReader
                         double cost = Double.parseDouble(fields[3].trim());
 
                         // Format into columns
-                        String row = String.format("%-10s %-12s %-24s $%-10.1f",
+                        System.out.printf("%-10s %-12s %-24s $%-10.1f%n",
                                 id, name, description, cost);
-                        System.out.println(row);
                     }
                 }
                 reader.close(); // must close the file to seal it and flush buffer
